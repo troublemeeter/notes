@@ -1,5 +1,4 @@
-# notes
-## Todo  
+# Todo  
 c++  
 竞赛打比赛  
 leetcode  
