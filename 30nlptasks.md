@@ -1,11 +1,11 @@
 # NLP Tasks
 
-1.分词 Word Segmentation
+1. 分词 Word Segmentation
 
 [chqiwang/convseg](https://github.com/chqiwang/convseg)
 ，基于CNN做中文分词，提供数据和代码。
 
-2.词预测 Word Prediction
+2. 词预测 Word Prediction
 
 [Kyubyong/word_prediction](https://github.com/Kyubyong/word_prediction)
 ，基于CNN做词预测，提供数据和代码。
