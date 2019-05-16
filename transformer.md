@@ -4,7 +4,7 @@ Transformer
 谷歌在文章《Attention is all you
 need》中提出的transformer模型。如图主要架构：同样为encoder-decoder模式，左边部分是encoder，右边部分是decoder。
 
-TensorFlow代码：<https://www.github.com/kyubyong/transformer>。
+TensorFlow代码：*https://www.github.com/kyubyong/transformer*。
 
 ![](media/f6ea89e5f1171798fe3797670eeeb4d9.png)
 
@@ -130,10 +130,11 @@ decoder input -\> dropout -\>
 
 (
 
->   Masked multihead self-attention(dec, dec, dec) = dec-\> dropout -\>
+   Masked multihead self-attention(dec, dec, dec) = dec-\> dropout -\>
 
->   multihead attention(dec, memory, memory) -\> dropout -\> residual connection
->   -\> LN -\> FFN -\> dropout -\> residual connection -\> LN -\>
+   multihead attention(dec, memory, memory) -\> dropout -\> residual connection
+
+   -\> LN -\> FFN -\> dropout -\> residual connection -\> LN -\>
 
 ) \* 6
 
@@ -153,6 +154,9 @@ Linear( x ) : [batchsize，maxlen2，vocabsize]
 
 Softmax函数：
 
+$p\left( k\|x \right)=\frac{\exp
+({{z}_{k}})}{\sum\nolimits_{i=1}^{K}{\exp ({{z}_{i}})}}$
+
 其中zi一般叫做 logits，即未被归一化的对数概率。
 
 (代码中没有softmax层，和encoder同样FFN后没有dropout，但文章说每个sublayer的output都有一个dropout)
@@ -161,11 +165,26 @@ Softmax函数：
 
 损失函数：cross entropy。用p代表predicted probability，用q代表groundtruth。即：
 
-groundtruth为one-hot，即每个样本只有惟一的类别，，y是真实类别。
+$cross\_entropy\_loss=\sum\limits_{k=1}^{K}{q\left( k\|x
+\right)\log (p\left( k\|x \right))}$
 
-对目标句子onehot 做label smooth用代替。（为了正则化，防止过拟合）
+groundtruth为one-hot，即每个样本只有惟一的类别，$q(k)={{\delta
+}_{k,y}}$，y是真实类别。
 
-可以理解为，对于函数分布的真实标签，将它变成以如下方式获得：首先从标注的真实标签的分布中取定，然后以一定的概率，将其替换为在分布中的随机变量。为均匀分布，即。
+   ${{\delta }_{k,y}}\text{=}\left\{ \begin{matrix}
+   1,k=y \\
+   0,k\ne y \\
+   \end{matrix} \right.$
+
+对目标句子onehot 做label
+smooth用$\tilde{q}(k\|x)$代替$q(k\|x)$。（为了正则化，防止过拟合）
+
+   $\tilde{q}(k\|x)=(1-\varepsilon ){{\delta }_{k,y}}+\varepsilon u(k)$
+
+可以理解为，对于$q(k)={{\delta
+}_{k,y}}$函数分布的真实标签，将它变成以如下方式获得：首先从标注的真实标签的$\delta
+$分布中取定，然后以一定的概率$\varepsilon
+$，将其替换为在$u(k)$分布中的随机变量。$u(k)$为均匀分布，即$u(k)=1/K$。
 
 *优化方法：*
 
