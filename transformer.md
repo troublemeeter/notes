@@ -165,8 +165,7 @@ $p\left( k\|x \right)=\frac{\exp
 
 损失函数：cross entropy。用p代表predicted probability，用q代表groundtruth。即：
 
-$cross\_entropy\_loss=\sum\limits_{k=1}^{K}{q\left( k\|x
-\right)\log (p\left( k\|x \right))}$
+$cross\_entropy\_loss=\sum\limits_{k=1}^{K}{q\left(k\|x\right)\log (p\left( k\|x \right))}$
 
 groundtruth为one-hot，即每个样本只有惟一的类别，$q(k)={{\delta
 }_{k,y}}$，y是真实类别。
