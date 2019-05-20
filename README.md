@@ -1,10 +1,11 @@
 # Todo  
-c++  
-竞赛打比赛  
+竞赛项目    
 leetcode  
+面经积累  
+毕设  
+c++  
 linux 命令  
 数据结构  
-面经积累  
 博客  
 tensorflow,pytorch  
 学习视频  
