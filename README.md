@@ -1,1 +1,1 @@
-# some notes
+# Learning Notes
